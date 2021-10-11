@@ -16,6 +16,30 @@ const todosOsBotoes = function () {
         }
     }
 }
+const alfabeto = function() {
+    const letraAlfabeto = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+    for (let i = 0; i < letraAlfabeto.length; i++) {
+        const letraClicada = document.getElementById(letraAlfabeto[i]);
+        letraClicada.onclick = function () {
+            imprimirClique(letraClicada.value);
+        }
+    }
+}
+const imprimirClique = function (letraClicada){
+    window.alert("entrou");
+    if (letra.value !== "") {
+        letra.value = "";
+        letra.value = letraClicada;
+        bloquearBotao(letraClicada);
+    }
+    else {
+        letra.value = letraClicada;
+        bloquearBotao(letraClicada);
+    }
+}
+const bloquearBotao = function (letraClicada){
+    document.getElementById(letraClicada).disabled = true;
+}
 const enviar = function () {
     let temALetra = false;
     let fimJogo = "";
@@ -49,54 +73,5 @@ const faz = function (campo) {
  
     }
 }
-
-// const animalEspecifico = Math.floor(Math.random() * todosAnimais.length);
-// palavra.innerHTML = todosAnimais[animalEspecifico];
-// palavra.innerHTML = "";
-// const palavraGuardada = todosAnimais[animalEspecifico];
-// for (let i = 0; i < palavraGuardada.length; i++) {
-//     palavra.innerHTML += "_ ";
-// }
-// window.alert(palavraGuardada);
-// confereLetra(palavraGuardada);
-
-// const todosAnimais = ["macaco","cavalo","cachorro","avestruz","capivara","arara","tamanduá","lagarto","cobra","anta"];
-// const todasFrutas = ["buriti","bacaba","melancia","pitaya","kiwi","cupu-açu","acerola","morango","tomate","romã"];
-// const all = [todosAnimais, todasFrutas];
-// for (const key in all) {
-//     const campo = document.getElementById(key);
-//     campo.onclick = function () {
-//         objeto[key](campo)
-//     }
-// }
-// const objetoSegundo = {
-//     "animal": somenteLetras,
-//     "cpf": somenteNumeros
-// }
-// for (const key in objetoSegundo) {
-//     const campo = document.getElementById(key);
-//     campo.addEventListener("keypress", objetoSegundo[key]);
-// }
-// const confereLetra = function(palavraGuardada) {
-//     for (let i = 0; i < palavraGuardada.length; i++) {
-//         if (letra.value == palavraGuardada[i]) {
-//             window.alert("certou");
-//         }
-//         else {
-//             window.alert("");
-//             return;
-//         }
-//     }
-// }
-// }
-// const fruta = function() {
-//     const frutaEspecifico = Math.floor(Math.random() * todasFrutas.length);
-//     palavra.innerHTML = todasFrutas[frutaEspecifico];
-// }
-// const cor = function() {
-//     const todasCores = ["roxo","magenta","cinza","fucsia","marrom","prateado","dourado","ciano","verde","vermelho"];
-//     const corEspecifico = Math.floor(Math.random() * todasCores.length);
-//     palavra.innerHTML = todasCores[corEspecifico];
-// }
-
 todosOsBotoes();
+alfabeto();
