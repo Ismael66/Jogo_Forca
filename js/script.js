@@ -1,14 +1,12 @@
-let palavra = document.getElementById("palavra");
+const palavra = document.getElementById("palavra");
 const letra = document.getElementById("letra");
-const animal = ["macaco", "cavalo", "cachorro", "avestruz", "capivara", "arara", "tamanduá", "lagarto", "cobra", "anta"];
-const fruta = ["buriti", "bacaba", "melancia", "pitaya", "kiwi", "cupu-açu", "acerola", "morango", "tomate", "romã"];
-const all = [animal, fruta];
-const especifico = Math.floor(Math.random() * all[posicao].length);
-let palavraGuardada = all[posicao][especifico];
+let palavraGuardada = null;
+const letraErrada = [];
 const todosOsBotoes = function () {
     const objeto = {
         "animal": faz,
-        "fruta": faz
+        "fruta": faz,
+        "submit": enviar
         // "cor": faz
     }
     for (const key in objeto) {
@@ -18,33 +16,40 @@ const todosOsBotoes = function () {
         }
     }
 }
+const enviar = function () {
+    let temALetra = false;
+    let fimJogo = "";
+    for (let i = 0; i < palavraGuardada.length; i++) {
+        if (letra.value == palavraGuardada[i]) {
+            palavra.children[i].value = letra.value;
+            temALetra = true;
+        }
+        fimJogo += palavra.children[i].value;
+    }
+    if (fimJogo === palavraGuardada ) {
+        window.alert("gameover");
+    }
+    if (temALetra === false) {
+        letraErrada.push(letra.value);
+    }
+    letra.value = "";
+}
 const faz = function (campo) {
     let posicao = 0;
     if (campo != "animal") {
         posicao = 1;
     }
-    window.alert(palavraGuardada);
-    palavraGuardada = palavraGuardada.split("");
+    const animal = ["macaco", "cavalo", "cachorro", "avestruz", "capivara", "arara", "tamanduá", "lagarto", "cobra", "anta"];
+    const fruta = ["buriti", "bacaba", "melancia", "pitaya", "kiwi", "cupu-açu", "acerola", "morango", "tomate", "romã"];
+    const all = [animal, fruta];
+    const especifico = Math.floor(Math.random() * all[posicao].length);
+    palavraGuardada = all[posicao][especifico];
     for (let i = 0; i < palavraGuardada.length; i++) {
-        palavra[i]= "_";
-        palavra.innerHTML += palavra[i];
+        palavra.innerHTML +="<input type='text' id='letra' maxlength='1' class='palavraSorteada' disabled='true'>";
+ 
     }
 }
-letra.onblur = function () {
-    for (let i = 0; i < palavraGuardada.length; i++) {
-        if (letra.value == palavraGuardada[i]) {
-            window.alert("a");
-        }
-        else {
-            let medida = "";
-            medida += 1;
-            if (medida.length == palavraGuardada.length) {
-                window.alert("errou");
-                return;
-            }
-        }
-    }
-}
+
 // const animalEspecifico = Math.floor(Math.random() * todosAnimais.length);
 // palavra.innerHTML = todosAnimais[animalEspecifico];
 // palavra.innerHTML = "";
