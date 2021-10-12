@@ -1,11 +1,12 @@
 const palavra = document.getElementById("palavra");
 let palavraGuardada = null;
 const letraErrada = [];
+const campoDigitacao = document.getElementById("manual");
 const todosOsBotoes = function () {
     const objeto = {
-        "animal": start,
-        "fruta": start
-        // "cor": start
+        "animal": escolhePalvraTema,
+        "fruta": escolhePalvraTema,
+        "digitar": desbloquearCampo
     }
     for (const key in objeto) {
         const campo = document.getElementById(key);
@@ -30,6 +31,30 @@ const bloquearJogo = function () {
     for (let i = 0; i < tecladoInteiro.length; i++) {
         tecladoInteiro[i].disabled = true;
     }
+}
+const desbloquearCampo = function () {
+    reset();
+    campoDigitacao.classList.remove('invisivel');
+}
+campoDigitacao.onkeydown = function (event) {
+    const semAcento = /[a-zA-Z ]/g;
+    if (event.keyCode == 13) {
+        if (semAcento.test(campoDigitacao.value)) {
+            digitarPalavra();    
+        } 
+        else if(campoDigitacao.value === ""){
+            window.alert("Digite uma palavra!")
+        }
+        else{
+            window.alert("Utilize uma palavra sem acentos :(")
+        }
+    }
+}
+const digitarPalavra = function () {
+    campoDigitacao.classList.add('invisivel');
+    palavraGuardada = campoDigitacao.value;
+    campoDigitacao.value = "";
+    inserePalavra(palavraGuardada);
 }
 const teclado = function (letraClicada) {
     if (palavraGuardada === null) {
@@ -76,9 +101,8 @@ const teclado = function (letraClicada) {
         }, 300);
     }
 }
-const start = function (campo) {
+const escolhePalvraTema = function (campo) {
     reset();
-    let posicao = 0;
     if (campo != "animal") {
         posicao = 1;
     }
@@ -88,14 +112,18 @@ const start = function (campo) {
     }
     const especifico = Math.floor(Math.random() * tipo[campo].length);
     palavraGuardada = tipo[campo][especifico];
+    inserePalavra(palavraGuardada);
+}
+const inserePalavra = function (palavraGuardada) {
     for (let i = 0; i < palavraGuardada.length; i++) {
-        palavra.innerHTML += "<input type='text' id='letra' maxlength='1' class='palavraSorteada' disabled='true'>";
+        palavra.innerHTML += "<input type='text' id='letra' maxlength='1' class='palavraSorteada lacuna' disabled='true'>";
     }
 }
 const reset = function () {
     letraErrada.length = 0;
     palavraGuardada = null;
     palavra.innerHTML = "";
+    campoDigitacao.classList.add('invisivel');
     const tecladoInteiro = document.getElementById("teclado").children;
     for (let i = 0; i < tecladoInteiro.length; i++) {
         const element = tecladoInteiro[i];

@@ -7,6 +7,10 @@ header {
     text-align: center;
 }
 section {
+    margin: auto;
+    width: 1vh;
+    max-width: 100vw;
+    min-width: 300px;
     background: white;
     border-radius: 10px;
     padding: 15px;
@@ -19,13 +23,33 @@ footer {
     text-align: center;
     font-style: italic;
 }
+#palavra{
+    height: 20px;
+}
 .palavraSorteada{
     width: 15px;
     margin: 5px;
 }
 .red{
     background-color: red;
+    color: white;
 }
 .green{
     background-color: green;
+    color: white;
+}
+.invisivel{
+    display:none;
+}
+.meio{
+    align-items: center;
+    justify-content: center;
+}
+input{
+    margin-top: 5px;
+}
+.lacuna{
+    border-right-style:hidden;
+    border-left-style:hidden;
+    border-top-style:hidden;
 }
