@@ -14,7 +14,7 @@ section {
     background: white;
     border-radius: 10px;
     padding: 15px;
-    width: 500px;
+    width: 483px;
     margin: auto;
     box-shadow: 5px 5px 10px red;
 }
@@ -44,6 +44,11 @@ footer {
 .meio{
     align-items: center;
     justify-content: center;
+}
+.palavraMeio{
+    width: 4%; 
+    left: 2%; 
+    position: relative;
 }
 input{
     margin-top: 5px;

@@ -116,7 +116,7 @@ const escolhePalvraTema = function (campo) {
 }
 const inserePalavra = function (palavraGuardada) {
     for (let i = 0; i < palavraGuardada.length; i++) {
-        palavra.innerHTML += "<input type='text' id='letra' maxlength='1' class='palavraSorteada lacuna' disabled='true'>";
+        palavra.innerHTML += "<input type='text' id='letra' maxlength='1' class='palavraSorteada lacuna palavraMeio' disabled='true'>";
     }
 }
 const reset = function () {
