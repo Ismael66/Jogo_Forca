@@ -3,9 +3,9 @@ let palavraGuardada = null;
 const letraErrada = [];
 const todosOsBotoes = function () {
     const objeto = {
-        "animal": faz,
-        "fruta": faz
-        // "cor": faz
+        "animal": start,
+        "fruta": start
+        // "cor": start
     }
     for (const key in objeto) {
         const campo = document.getElementById(key);
@@ -15,18 +15,28 @@ const todosOsBotoes = function () {
     }
 }
 const alfabeto = function () {
-    const letraAlfabeto = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-    for (let i = 0; i < letraAlfabeto.length; i++) {
-        const letraClicada = document.getElementById(letraAlfabeto[i]);
-        letraClicada.onclick = function () {
-            teclado(letraClicada.value.toLowerCase());
+    const tecladoInteiro = document.getElementById("teclado").children;
+    for (let i = 0; i < tecladoInteiro.length; i++) {
+        tecladoInteiro[i].onclick = function () {
+            teclado(tecladoInteiro[i].value.toLowerCase());
         }
     }
 }
 const bloquearBotao = function (letraClicada) {
     document.getElementById(letraClicada).disabled = true;
 }
+const bloquearJogo = function () {
+    const tecladoInteiro = document.getElementById("teclado").children;
+    for (let i = 0; i < tecladoInteiro.length; i++) {
+        tecladoInteiro[i].disabled = true;
+    }
+}
 const teclado = function (letraClicada) {
+    if (palavraGuardada === null) {
+        window.alert("Escolha um tema de palavras");
+        return;
+    }
+    bloquearBotao(letraClicada);
     let temALetra = false;
     let fimJogo = "";
     for (let i = 0; i < palavraGuardada.length; i++) {
@@ -37,42 +47,55 @@ const teclado = function (letraClicada) {
         }
         fimJogo += palavra.children[i].value;
     }
-    if (fimJogo === palavraGuardada) {
-        const vitoria = window.confirm("Parabéns, quer tentar novamente?");
-        if (vitoria === true) {
-            document.location.reload(true);
-        }
-    }
     if (temALetra === false) {
+        document.getElementById(letraClicada).classList.add('red');
         letraErrada.push(letraClicada);
         if (letraErrada.length === 3) {
-            const derrota = window.confirm("Perdeu, quer tentar novamente?");
-            if (derrota === true) {
-                document.location.reload(true);
-            }
+            setTimeout(function () {
+                const derrota = window.confirm("Perdeu, quer tentar novamente?");
+                if (derrota === true) {
+                    reset();
+                    return;
+                }
+                else {
+                    bloquearJogo();
+                }
+            }, 300);
         }
     }
-    document.getElementById(letraClicada).classList.add('red');
-    bloquearBotao(letraClicada);
+    if (fimJogo === palavraGuardada) {
+        setTimeout(function () {
+            const vitoria = window.confirm("Parabéns, quer tentar novamente?");
+            if (vitoria === true) {
+                reset();
+                return;
+            }
+            else {
+                bloquearJogo();
+            }
+        }, 300);
+    }
 }
-const faz = function (campo) {
-    resetarCor();
-    letraErrada.length = 0;
+const start = function (campo) {
+    reset();
     let posicao = 0;
     if (campo != "animal") {
         posicao = 1;
     }
-    const animal = ["macaco", "cavalo", "cachorro", "avestruz", "capivara", "arara", "crocodilo", "lagarto", "cobra", "anta"];
-    const fruta = ["buriti", "bacaba", "melancia", "pitaya", "kiwi", "jabuticaba", "acerola", "morango", "tomate", "manga"];
-    const all = [animal, fruta];
-    const especifico = Math.floor(Math.random() * all[posicao].length);
-    palavraGuardada = all[posicao][especifico];
-    palavra.innerHTML = "";
+    const tipo = {
+        animal: ["macaco", "cavalo", "cachorro", "avestruz", "capivara", "arara", "crocodilo", "lagarto", "cobra", "anta"],
+        fruta: ["buriti", "bacaba", "melancia", "pitaya", "kiwi", "jabuticaba", "acerola", "morango", "tomate", "manga"]
+    }
+    const especifico = Math.floor(Math.random() * tipo[campo].length);
+    palavraGuardada = tipo[campo][especifico];
     for (let i = 0; i < palavraGuardada.length; i++) {
         palavra.innerHTML += "<input type='text' id='letra' maxlength='1' class='palavraSorteada' disabled='true'>";
     }
 }
-const resetarCor = function () {
+const reset = function () {
+    letraErrada.length = 0;
+    palavraGuardada = null;
+    palavra.innerHTML = "";
     const tecladoInteiro = document.getElementById("teclado").children;
     for (let i = 0; i < tecladoInteiro.length; i++) {
         const element = tecladoInteiro[i];
