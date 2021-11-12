@@ -38,21 +38,18 @@ const desbloquearCampo = function () {
 }
 campoDigitacao.onkeydown = function (event) {
     const semAcento = /[a-zA-Z ]/g;
-    if (event.keyCode == 13) {
+    if (event.keyCode === 13) {
         if (semAcento.test(campoDigitacao.value)) {
             digitarPalavra();    
         } 
-        else if(campoDigitacao.value === ""){
-            window.alert("Digite uma palavra!")
-        }
-        else{
-            window.alert("Utilize uma palavra sem acentos :(")
+        else if(campoDigitacao.value === "" || campoDigitacao.value.length === 1){
+            window.alert("Digite uma palavra valida!")
         }
     }
 }
 const digitarPalavra = function () {
     campoDigitacao.classList.add('invisivel');
-    palavraGuardada = campoDigitacao.value;
+    palavraGuardada = campoDigitacao.value.normalize("NFD").replace(/[^a-zA-Z ]/g,"");
     campoDigitacao.value = "";
     inserePalavra(palavraGuardada);
 }
