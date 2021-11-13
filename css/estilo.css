@@ -1,60 +1,71 @@
+@import url(alerta_invisivel.css);
 body {
-    background: blueviolet;
+    background-image: url(/images/frame-00.jpg);
+    background-repeat: no-repeat;
     font: normal 15pt Arial;
 }
 header {
-    color: white;
+    color: black;
     text-align: center;
+    margin-left: 230px;
+    margin-top: 30px;
 }
 section {
-    margin: auto;
-    width: 1vh;
-    max-width: 100vw;
-    min-width: 300px;
     background: white;
     border-radius: 10px;
     padding: 15px;
-    width: 483px;
-    margin: auto;
+    width: 700px;
+    margin: 70px 450px;
     box-shadow: 5px 5px 10px red;
 }
 footer {
-    color: white;
     text-align: center;
-    font-style: italic;
+}
+#manual{
+    outline: none;
 }
 #palavra{
-    height: 20px;
+    display: flex;
+    justify-content: center;
+}
+#botoes{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .palavraSorteada{
-    width: 15px;
+    display: block;
+    width: 20px;
+    height: 20px;
     margin: 5px;
-}
-.red{
-    background-color: red;
-    color: white;
-}
-.green{
-    background-color: green;
-    color: white;
+    border-right-style:hidden;
+    border-left-style:hidden;
+    border-top-style:hidden;
+    background-color: rgba(255, 255, 255, 0);
 }
 .invisivel{
     display:none;
 }
-.meio{
-    align-items: center;
-    justify-content: center;
-}
-.palavraMeio{
-    width: 4%; 
-    left: 2%; 
-    position: relative;
-}
 input{
     margin-top: 5px;
 }
-.lacuna{
-    border-right-style:hidden;
-    border-left-style:hidden;
-    border-top-style:hidden;
+#teclado{
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
 }
+.containerTeclado{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+.getBtn{
+    width: 38px;
+    height: 38px;
+    margin: 3px;
+}
+.getControles{
+    width: 150px;
+}
+
+
